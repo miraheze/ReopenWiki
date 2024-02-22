@@ -25,13 +25,13 @@
 	},
 	"GroupPermissions": {
 		"user": {
-			"request-wiki-reopen": true
+			"request-reopen-wiki": true
 		}
 	},
 	"AvailableRights": [
-		"handle-wiki-reopen-requests",
-		"request-wiki-reopen",
-		"view-private-wiki-reopen-requests"
+		"handle-reopen-wiki-requests",
+		"request-reopen-wiki",
+		"view-private-reopen-wiki-requests"
 	],
 	"LogActionsHandlers": {
 		"reopenwiki/*": "LogFormatter",
