@@ -1,5 +1,5 @@
 {
-	"name": "ImportDump",
+	"name": "ReopenWiki",
 	"author": "Universal Omega",
 	"url": "https://github.com/miraheze/ImportDump",
 	"descriptionmsg": "importdump-desc",
@@ -10,51 +10,42 @@
 		"MediaWiki": ">= 1.39.0"
 	},
 	"MessagesDirs": {
-		"ImportDump": [
+		"ReopenWiki": [
 			"i18n"
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"ImportDumpAliases": "ImportDumpAliases.php"
+		"ReopenWikiAliases": "ReopenWikiAliases.php"
 	},
 	"AutoloadNamespaces": {
-		"Miraheze\\ImportDump\\": "includes/"
+		"Miraheze\\ReopenWiki\\": "includes/"
 	},
 	"TestAutoloadNamespaces": {
-		"Miraheze\\ImportDump\\Tests\\": "tests/phpunit/"
+		"Miraheze\\ReopenWiki\\Tests\\": "tests/phpunit/"
 	},
 	"GroupPermissions": {
 		"user": {
-			"request-import-dump": true
+			"request-wiki-reopen": true
 		}
 	},
 	"AvailableRights": [
-		"handle-import-dump-interwiki",
-		"handle-import-dump-requests",
-		"request-import-dump",
-		"view-private-import-dump-requests"
+		"handle-wiki-reopen-requests",
+		"request-wiki-reopen",
 	],
 	"LogActionsHandlers": {
-		"importdump/*": "LogFormatter",
-		"importdumpprivate/*": "LogFormatter"
+		"reopenwiki/*": "LogFormatter",
 	},
 	"LogHeaders": {
-		"importdump": "importdump-log-header",
-		"importdumpprivate": "importdumpprivate-log-header"
+		"reopenwiki": "reopenwiki-log-header",
 	},
 	"LogNames": {
-		"importdump": "importdump-log-name",
-		"importdumpprivate": "importdumpprivate-log-name"
+		"reopenwiki": "reopenwiki-log-name",
 	},
 	"LogTypes": [
-		"importdump",
-		"importdumpprivate"
+		"reopenwiki",
 	],
-	"LogRestrictions": {
-		"importdumpprivate": "view-private-import-dump-requests"
-	},
 	"ActionFilteredLogs": {
-		"importdump": {
+		"reopenwiki": {
 			"interwiki": [
 				"interwiki"
 			],
@@ -65,21 +56,10 @@
 				"statusupdate"
 			]
 		},
-		"importdumpprivate": {
-			"interwiki": [
-				"interwiki"
-			],
-			"request": [
-				"request"
-			],
-			"statusupdate": [
-				"statusupdate"
-			]
-		}
 	},
 	"SpecialPages": {
-		"RequestImportDump": {
-			"class": "Miraheze\\ImportDump\\Specials\\SpecialRequestImportDump",
+		"RequestReopenWiki": {
+			"class": "Miraheze\\ReopenWiki\\Specials\\SpecialRequestReopenWiki",
 			"services": [
 				"DBLoadBalancerFactory",
 				"MimeAnalyzer",
@@ -88,10 +68,10 @@
 			]
 		},
 		"RequestImportDumpQueue": {
-			"class": "Miraheze\\ImportDump\\Specials\\SpecialRequestImportDumpQueue",
+			"class": "Miraheze\\ReopenWiki\\Specials\\SpecialRequestReopenWiki",
 			"services": [
 				"DBLoadBalancerFactory",
-				"ImportDumpRequestManager",
+				"ReopenWikiRequestManager",
 				"PermissionManager",
 				"UserFactory"
 			]
@@ -116,19 +96,19 @@
 	},
 	"HookHandlers": {
 		"Installer": {
-			"class": "Miraheze\\ImportDump\\Hooks\\Handlers\\Installer"
+			"class": "Miraheze\\ReopenWiki\\Hooks\\Handlers\\Installer"
 		},
 		"Main": {
-			"class": "Miraheze\\ImportDump\\Hooks\\Handlers\\Main",
+			"class": "Miraheze\\ReopenWiki\\Hooks\\Handlers\\Main",
 			"services": [
 				"ConfigFactory"
 			]
 		}
 	},
 	"ResourceModules": {
-		"ext.importdump.oouiform": {
+		"ext.reopenwiki.oouiform": {
 			"targets": [ "desktop", "mobile" ],
-			"scripts": "ext.importdump.oouiform.ooui.js",
+			"scripts": "ext.reopenwiki.oouiform.ooui.js",
 			"dependencies": [
 				"mediawiki.storage",
 				"oojs-ui-widgets"
@@ -136,58 +116,46 @@
 		},
 		"ext.importdump.oouiform.styles": {
 			"targets": [ "desktop", "mobile" ],
-			"styles": "ext.importdump.oouiform.ooui.less"
+			"styles": "ext.reopenwiki.oouiform.ooui.less"
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "modules",
-		"remoteExtPath": "ImportDump/modules"
+		"remoteExtPath": "ReopenWiki/modules"
 	},
 	"config": {
-		"ImportDumpCentralWiki": {
+		"ReopenWikiHelpUrl": {
 			"value": "",
-			"description": "If set, only allow users to request import dumps on this wiki."
+			"description": "Full URL. If set, adds a help URL to Special:RequestReopenWiki."
 		},
-		"ImportDumpHelpUrl": {
-			"value": "",
-			"description": "Full URL. If set, adds a help URL to Special:RequestImportDump."
-		},
-		"ImportDumpInterwikiMap": {
-			"value": [],
-			"description": "A mapping of 'domain => interwiki prefix' for multi-level interwiki prefix generation for --username-prefix."
-		},
-		"ImportDumpScriptCommand": {
-			"value": "php {IP}/maintenance/importDump.php --wiki={wiki} --username-prefix=\"{username-prefix}\" {file-path}",
-			"description": "Generated maintenance script command to use."
-		},
-		"ImportDumpUsersNotifiedOnAllRequests": {
+		"ReopenWikiUsersNotifiedOnAllRequests": {
 			"value": [],
 			"description": "Array of usernames to send email notifications to for all requests. Users listed here must have a verified email address on their account. This doesn't do anything if the Echo extension is not installed."
 		}
 	},
 	"ConfigRegistry": {
-		"ImportDump": "GlobalVarConfig::newInstance"
+		"ReopenWiki": "GlobalVarConfig::newInstance"
 	},
 	"DefaultUserOptions": {
-		"echo-subscriptions-email-importdump-new-request": true,
-		"echo-subscriptions-email-importdump-request-comment": true,
-		"echo-subscriptions-email-importdump-request-status-update": true,
-		"echo-subscriptions-web-importdump-new-request": false,
-		"echo-subscriptions-web-importdump-request-comment": true,
-		"echo-subscriptions-web-importdump-request-status-update": true
+		"echo-subscriptions-email-reopenwiki-new-request": true,
+		"echo-subscriptions-email-reopenwiki-request-comment": true,
+		"echo-subscriptions-email-reopenwiki-request-status-update": true,
+		"echo-subscriptions-web-reopenwiki-new-request": false,
+		"echo-subscriptions-web-reopenwiki-request-comment": true,
+		"echo-subscriptions-web-reopenwiki-request-status-update": true
 	},
 	"HiddenPrefs": [
-		"echo-subscriptions-email-importdump-new-request",
-		"echo-subscriptions-web-importdump-new-request"
+		"echo-subscriptions-email-reopenwiki-new-request",
+		"echo-subscriptions-web-reopenwiki-new-request"
 	],
 	"RateLimits": {
-		"request-import-dump": {
+		"request-reopen-wiki": {
 			"user": [
 				5,
 				60
 			]
 		}
-	},
+	}
 	"ServiceWiringFiles": [
 		"includes/ServiceWiring.php"
 	],
