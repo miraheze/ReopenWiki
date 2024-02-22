@@ -31,24 +31,29 @@
 	"AvailableRights": [
 		"handle-wiki-reopen-requests",
 		"request-wiki-reopen",
+		"view-private-wiki-reopen-requests"
 	],
 	"LogActionsHandlers": {
 		"reopenwiki/*": "LogFormatter",
+		"reopenwikiprivate/*": "LogFormatter"
 	},
 	"LogHeaders": {
 		"reopenwiki": "reopenwiki-log-header",
+		"reopenwikiprivate": "reopenwikiprivate-log-header"
 	},
 	"LogNames": {
 		"reopenwiki": "reopenwiki-log-name",
+		"reopenwikiprivate": "reopenwikiprivate-log-name"
 	},
 	"LogTypes": [
 		"reopenwiki",
+		"reopenwikiprivate"
 	],
+	"LogRestrictions": {
+		"reopenwikiprivate": "view-private-reopen-wiki-requests"
+	},
 	"ActionFilteredLogs": {
 		"reopenwiki": {
-			"interwiki": [
-				"interwiki"
-			],
 			"request": [
 				"request"
 			],
@@ -56,6 +61,14 @@
 				"statusupdate"
 			]
 		},
+		"reopenwikiprivate": {
+			"request": [
+				"request"
+			],
+			"statusupdate": [
+				"statusupdate"
+			],
+		}
 	},
 	"SpecialPages": {
 		"RequestReopenWiki": {
