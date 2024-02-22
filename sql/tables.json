@@ -1,6 +1,6 @@
 [
 	{
-		"name": "importdump_requests",
+		"name": "reopenwiki_requests",
 		"comment": "",
 		"columns": [
 			{
@@ -11,25 +11,19 @@
 			},
 			{
 				"name": "request_actor",
-				"comment": "",
+				"comment": "Actor ID of the user who created the request",
 				"type": "bigint",
 				"options": { "notnull": true, "unsigned": true }
 			},
 			{
 				"name": "request_timestamp",
-				"comment": "",
+				"comment": "Timestamp of when the request was created",
 				"type": "mwtimestamp",
 				"options": { "notnull": true }
 			},
 			{
-				"name": "request_source",
-				"comment": "",
-				"type": "string",
-				"options": { "notnull": true }
-			},
-			{
 				"name": "request_target",
-				"comment": "",
+				"comment": "The database name of the wiki requesting to be reopened",
 				"type": "string",
 				"options": { "notnull": true, "length": 64 }
 			},
@@ -41,23 +35,19 @@
 			},
 			{
 				"name": "request_status",
-				"comment": "",
-				"type": "mwenum",
-				"options": { "notnull": true,
-					"CustomSchemaOptions": {
-						"enum_values": [ "complete", "declined", "inprogress", "pending" ]
-					}
-				}
+				"comment": "An int representing the status of the request",
+				"type": "mwtinyint",
+				"options": { "notnull": true }
 			},
 			{
 				"name": "request_locked",
-				"comment": "",
+				"comment": "An int representing if the request is locked, meaning in read-only mode",
 				"type": "mwtinyint",
 				"options": { "notnull": true, "unsigned": true, "default": 0 }
 			},
 			{
 				"name": "request_private",
-				"comment": "",
+				"comment": "An int representing if this request should be hidden from those without view-private-reopen-wiki-requests",
 				"type": "mwtinyint",
 				"options": { "notnull": true, "unsigned": true, "default": 0 }
 			}
@@ -91,7 +81,7 @@
 		"pk": [ "request_id" ]
 	},
 	{
-		"name": "importdump_request_comments",
+		"name": "reopenwiki_request_comments",
 		"comment": "",
 		"columns": [
 			{
