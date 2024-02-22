@@ -2,8 +2,8 @@
 	"name": "ReopenWiki",
 	"author": "Universal Omega",
 	"url": "https://github.com/miraheze/ImportDump",
-	"descriptionmsg": "importdump-desc",
-	"namemsg": "importdump-extensionname",
+	"descriptionmsg": "reopenwiki-desc",
+	"namemsg": "reopenwiki-extensionname",
 	"license-name": "GPL-3.0-or-later",
 	"type": "specialpage",
 	"requires": {
